@@ -16,7 +16,7 @@ Then open a new terminal tab. `install.sh` is safe to run again. It:
 - links `starship.toml`, the Ghostty config and the yazi config into `~/.config`, moving any existing file aside
 - adds a line to `~/.zshenv`, `~/.zprofile` and `~/.zshrc` that loads its copy in `zsh/`: PATH for every shell, Homebrew for login shells, the rest for the prompt
 - includes `git/gitconfig` from `~/.gitconfig`: delta for diffs, zdiff3 conflict markers and a few aliases
-- installs the `Brewfile`, two Oh My Zsh plugins (fzf-tab and you-should-use), the yazi theme and the gh-dash extension
+- installs the `Brewfile` (all of it, apps included: trim it first on your Mac), two Oh My Zsh plugins (fzf-tab and you-should-use), the yazi theme and the gh-dash extension
 - adds `agents/machine.md` to `~/.claude/CLAUDE.md`, and copies it into `~/.codex/AGENTS.md` and `~/AGENTS.md` if they exist, so coding agents know what's installed
 
 `agents/machine.md` describes my Mac. Edit it, or remove that part of `install.sh`, before you run it on yours.
@@ -31,11 +31,13 @@ Then open a new terminal tab. `install.sh` is safe to run again. It:
 | `yazi/` | File manager config, opened with `y` |
 | `git/gitconfig` | Git defaults and aliases |
 | `agents/machine.md` | Notes for coding agents about this machine |
-| `Brewfile` | The command-line tools these files use |
+| `Brewfile` | Everything Homebrew installs on my Mac: command-line tools, apps, App Store apps and VS Code extensions |
 
 ## Settings for one machine
 
 `zsh/local.zsh` loads last and git ignores it. Put aliases and work shortcuts there. Define a `_menu_rows_local` function in it to add rows to the top of `menu`.
+
+`Brewfile.local` works the same way for Homebrew: git ignores it and `Brewfile` loads it at the end.
 
 ## Agent shells
 
