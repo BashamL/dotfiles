@@ -1,0 +1,53 @@
+#!/bin/sh
+# Prints a prompt segment wrapped in an OSC 8 hyperlink, so Cmd-click in Ghostty opens it.
+#   prompt-link dir     the folder, opens in Finder
+#   prompt-link branch  the git branch, opens on GitHub
+#
+# Starship marks each escape code as zero-width for zsh by reading from ESC up to
+# the next "m". So each link code here is followed by a colour code (which ends in
+# "m"), and URLs carry no lowercase "m": hosts are upper-cased, and paths write
+# it as %6D. Both still open the same place.
+
+# link <url> <text> <colour sgr>
+link() {
+  url=$(printf '%s' "$1" | sed 's/%/%25/g; s/ /%20/g; s/m/%6D/g')
+  printf '\033]8;;%s\033\\\033[%sm%s\033]8;;\033\\\033[0m' "$url" "$3" "$2"
+}
+
+BLUE='1;38;2;137;180;250'
+GREEN='1;38;2;166;227;161'
+
+case "$1" in
+dir)
+  top=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ -n "$top" ]; then
+    # Inside a repo: repo name, then the path below it
+    start="${top##*/}"
+    rest="${PWD#"$top"}"
+  else
+    case "$PWD" in
+      "$HOME") start="~"; rest="" ;;
+      "$HOME"/*) start="~"; rest="${PWD#"$HOME"}" ;;
+      *) start=""; rest="$PWD" ;;
+    esac
+  fi
+  # Long paths keep where they start and the last 2 folders
+  shown=$(printf '%s\n' "$rest" | awk -F/ -v s="$start" '{ if (NF > 4) print s "/…/" $(NF-1) "/" $NF; else print s $0 }')
+  link "file://$PWD" "$shown" "$BLUE"
+  ;;
+branch)
+  branch=$(git branch --show-current 2>/dev/null)
+  if [ -z "$branch" ]; then
+    printf '\033[%sm%s\033[0m' "$GREEN" "$(git rev-parse --short HEAD 2>/dev/null)"   # detached HEAD
+    exit 0
+  fi
+  remote=$(git remote get-url origin 2>/dev/null)
+  case "$remote" in
+    git@github.com:*) repo=${remote#git@github.com:} ;;
+    https://github.com/*) repo=${remote#https://github.com/} ;;
+    *) printf '\033[%sm %s\033[0m' "$GREEN" "$branch"; exit 0 ;;
+  esac
+  repo=${repo%.git}
+  link "HTTPS://GITHUB.COM/$repo/tree/$branch" " $branch" "$GREEN"
+  ;;
+esac

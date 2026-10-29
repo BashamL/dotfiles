@@ -1,0 +1,33 @@
+# Included from ~/.gitconfig ([include] path = ~/dotfiles/git/gitconfig)
+
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true          # n / N jump between files in a diff
+	line-numbers = true
+	syntax-theme = Catppuccin Mocha
+	hyperlinks = true
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[merge]
+	conflictStyle = zdiff3
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true   # first `git push` on a new branch just works
+[fetch]
+	prune = true
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[help]
+	autocorrect = prompt
+[alias]
+	lg = log --graph --date=relative --pretty=format:'%C(yellow)%h%C(reset) %C(green)(%ad)%C(reset) %s %C(blue)<%an>%C(reset)%C(auto)%d%C(reset)'
+	recent = branch --sort=-committerdate --format='%(color:yellow)%(committerdate:relative)%(color:reset)\t%(color:green)%(refname:short)%(color:reset)\t%(subject)'
+	undo = reset --soft HEAD~1
+	amend = commit --amend --no-edit

@@ -1,0 +1,9 @@
+# yazi: run `y` to browse, q to quit and land in the folder you were in.
+[mgr]
+show_hidden = true
+sort_by = "natural"
+sort_dir_first = true
+
+# Open text files in Cursor without blocking yazi (EDITOR is `cursor --wait`)
+[opener]
+edit = [{ run = "cursor %s", orphan = true, desc = "Open in Cursor", for = "unix" }]

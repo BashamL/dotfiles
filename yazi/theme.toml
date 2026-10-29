@@ -1,0 +1,3 @@
+# Flavors are installed from package.toml: `ya pkg install`
+[flavor]
+dark = "catppuccin-mocha"

@@ -1,0 +1,59 @@
+# Ghostty. Docs: https://ghostty.org/docs/config
+# ~/.config/ghostty/config.ghostty -> ~/dotfiles/ghostty/config.ghostty
+# Reload: Cmd+Shift+,   Every action: Cmd+Shift+P
+
+# Look
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+adjust-cell-height = 10%
+window-colorspace = display-p3
+background-opacity = 0.94
+background-blur = 20
+unfocused-split-opacity = 0.8
+window-padding-x = 14
+window-padding-y = 10
+window-padding-balance = true
+macos-titlebar-style = tabs
+cursor-style = bar
+cursor-style-blink = false
+
+# Cursor streaks when it jumps (shaders/cursor-trail.glsl)
+custom-shader = ~/dotfiles/ghostty/shaders/cursor-trail.glsl
+custom-shader-animation = true
+
+# App icon in Catppuccin colours
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = #cdd6f4
+macos-icon-screen-color = #1e1e2e,#45475a,#cba6f7
+
+# Behaviour
+macos-option-as-alt = left
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+window-save-state = always
+confirm-close-surface = false
+shell-integration-features = cursor,sudo,title
+scrollback-limit = 100000000
+
+# macOS notification when a command that ran 30s+ finishes in a tab you're not looking at
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = no-bell,notify
+notify-on-command-finish-after = 30s
+
+# Command-line selection (zsh/editing.zsh): Shift+Cmd+←/→ select to start or end, Cmd+X cuts
+keybind = super+shift+arrow_left=text:\x1b[1;10D
+keybind = super+shift+arrow_right=text:\x1b[1;10C
+keybind = super+x=text:\x1b[120;9u
+
+# Clickable launcher (zsh/menu.zsh): Cmd+Shift+M clears the line and opens it
+keybind = super+shift+m=text:\x15menu\r
+
+# Drop-down terminal from anywhere: Ctrl+` (needs Accessibility permission once)
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-position = top
+quick-terminal-animation-duration = 0.15
+
+# Splits use Ghostty's defaults: Cmd+D right, Cmd+Shift+D down, Cmd+Option+arrows
+# to move, Cmd+Ctrl+arrows to resize, Cmd+Ctrl+= to even out, Cmd+Shift+Enter to zoom
