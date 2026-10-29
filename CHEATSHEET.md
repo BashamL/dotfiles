@@ -136,6 +136,8 @@ The cursor streaks when it jumps: `~/dotfiles/ghostty/shaders/cursor-trail.glsl`
 | File | What it is |
 | --- | --- |
 | `~/dotfiles/zsh/zshrc` | Oh My Zsh, plugins, history |
+| `~/dotfiles/zsh/zshenv`, `zprofile` | PATH: mise shims and `~/.local/bin` ahead of Homebrew |
+| `~/dotfiles/zsh/brew.zsh` | Homebrew upgrade every 3 days in the background |
 | `~/dotfiles/zsh/aliases.zsh` | Shortcuts |
 | `~/dotfiles/zsh/functions.zsh` | fe, rge, fbr, wt, fkill, port |
 | `~/dotfiles/zsh/menu.zsh` | The `menu` launcher: add a row to add a button |

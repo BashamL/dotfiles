@@ -17,9 +17,11 @@ link starship/starship.toml "$HOME/.config/starship.toml"
 link ghostty/config.ghostty "$HOME/.config/ghostty/config.ghostty"
 link yazi "$HOME/.config/yazi"
 
-# ~/.zshrc loads zsh/zshrc
-grep -q 'dotfiles/zsh/zshrc' "$HOME/.zshrc" 2>/dev/null ||
-  printf '\nsource "$HOME/dotfiles/zsh/zshrc"\n' >>"$HOME/.zshrc"
+# ~/.zshenv, ~/.zprofile and ~/.zshrc load their copies in zsh/
+for f in zshenv zprofile zshrc; do
+  grep -q "dotfiles/zsh/$f" "$HOME/.$f" 2>/dev/null ||
+    printf '\nsource "$HOME/dotfiles/zsh/%s"\n' "$f" >>"$HOME/.$f"
+done
 
 # ~/.gitconfig includes git/gitconfig
 git config --global --get-all include.path | grep -qx '~/dotfiles/git/gitconfig' ||

@@ -14,7 +14,7 @@ git clone https://github.com/BashamL/dotfiles ~/dotfiles
 Then open a new terminal tab. `install.sh` is safe to run again. It:
 
 - links `starship.toml`, the Ghostty config and the yazi config into `~/.config`, moving any existing file aside
-- adds a line to `~/.zshrc` that loads `zsh/zshrc`
+- adds a line to `~/.zshenv`, `~/.zprofile` and `~/.zshrc` that loads its copy in `zsh/`: PATH for every shell, Homebrew for login shells, the rest for the prompt
 - includes `git/gitconfig` from `~/.gitconfig`: delta for diffs, zdiff3 conflict markers and a few aliases
 - installs the `Brewfile`, two Oh My Zsh plugins (fzf-tab and you-should-use), the yazi theme and the gh-dash extension
 - adds `agents/machine.md` to `~/.claude/CLAUDE.md`, and copies it into `~/.codex/AGENTS.md` and `~/AGENTS.md` if they exist, so coding agents know what's installed
@@ -39,4 +39,4 @@ Then open a new terminal tab. `install.sh` is safe to run again. It:
 
 ## Agent shells
 
-When Cursor's agent terminal or Claude Code runs the shell (`CURSOR_AGENT`, `CLAUDECODE` or `AI_AGENT` is set), it gets a plain prompt, only the git plugin, `PAGER=cat` and `GIT_EDITOR=true`, so no command waits for a keyboard.
+When Cursor's agent terminal or Claude Code runs the shell (`CURSOR_AGENT`, `CLAUDECODE`, `AI_AGENT` or `CODEX_SANDBOX` is set), it gets a plain prompt, only the git plugin, `PAGER=cat` and `GIT_EDITOR=true`, so no command waits for a keyboard.

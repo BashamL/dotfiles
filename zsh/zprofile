@@ -1,0 +1,6 @@
+# Sourced from ~/.zprofile: login shells (every new terminal tab), after zshenv.
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+# macOS's path_helper and brew shellenv both push their folders to the front;
+# put mise shims and ~/.local/bin back ahead of them (zshenv explains why).
+path=("$HOME/.local/share/mise/shims" "$HOME/.local/bin" $path)

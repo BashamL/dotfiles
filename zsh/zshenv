@@ -1,0 +1,8 @@
+# Sourced from ~/.zshenv: every zsh, scripts and agent shells included.
+typeset -U path   # no duplicate PATH entries
+
+# mise shims ahead of Homebrew: every shell runs the Node a folder pins
+# (.node-version, mise.toml) or mise's global default, never Homebrew's own
+# node. `mise activate` (toolchains.zsh) only switches versions at a prompt.
+# ~/.local/bin holds uv's tools and other user installs.
+path=("$HOME/.local/share/mise/shims" "$HOME/.local/bin" $path)
