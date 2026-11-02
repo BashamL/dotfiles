@@ -185,8 +185,6 @@ cask "stremioservice"
 cask "superwhisper"
 # Control windows and applications right from your trackpad
 cask "swish"
-# Mesh VPN based on WireGuard
-cask "tailscale-app"
 # To-do list
 cask "todoist-app"
 # Open-source code editor
