@@ -142,7 +142,7 @@ The cursor streaks when it jumps: `~/dotfiles/ghostty/shaders/cursor-trail.glsl`
 | `~/dotfiles/zsh/functions.zsh` | fe, rge, fbr, wt, fkill, port |
 | `~/dotfiles/zsh/menu.zsh` | The `menu` launcher: add a row to add a button |
 | `~/dotfiles/zsh/editing.zsh` | Selecting text on the command line |
-| `~/dotfiles/starship/prompt-link` | The clickable folder and branch in the prompt |
+| `~/dotfiles/zsh/prompt-links.zsh` | The clickable folder and branch in the prompt |
 | `~/dotfiles/zsh/tools.zsh` | Starship, zoxide, fzf |
 | `~/dotfiles/zsh/toolchains.zsh` | mise, bun, LM Studio |
 | `~/dotfiles/zsh/local.zsh` | Extras for this machine only (aliases, menu rows), not tracked by git |

@@ -8,10 +8,10 @@ command_timeout = 800
 
 # Line 1: folder, git, toolchain, how long the last command took
 # Line 2: ❯ (time on the right)
-# Folder and branch are links: Cmd-click opens Finder or GitHub (prompt-link)
+# Folder and branch are links: Cmd-click opens Finder or GitHub (zsh/prompt-links.zsh)
 format = """
-${custom.dir}\
-${custom.branch}\
+${env_var.PROMPT_LINK_DIR}\
+${env_var.PROMPT_LINK_BRANCH}\
 $git_state\
 $git_status\
 $nodejs\
@@ -23,19 +23,12 @@ $cmd_duration
 $character"""
 right_format = "$time"
 
-# prompt-link colours its own text
-[custom.dir]
-command = '"$HOME/dotfiles/starship/prompt-link" dir'
-when = true
-shell = ["sh"]
-format = "$output "
+# Set by zsh/prompt-links.zsh before each prompt, coloured already
+[env_var.PROMPT_LINK_DIR]
+format = "$env_value "
 
-[custom.branch]
-command = '"$HOME/dotfiles/starship/prompt-link" branch'
-when = true
-require_repo = true
-shell = ["sh"]
-format = "[on](overlay1) $output "
+[env_var.PROMPT_LINK_BRANCH]
+format = "[on](overlay1) $env_value "
 
 [git_status]
 style = "bold yellow"

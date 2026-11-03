@@ -4,11 +4,12 @@
 if [[ -n $AGENT_SHELL ]]; then
   PROMPT='%~ %# '
 else
-  eval "$(starship init zsh)"
+  _cached_init starship $commands[starship] starship init zsh --print-full-init
+  source "$DOTFILES/zsh/prompt-links.zsh"
 fi
 
 # zoxide: `z proj` jumps to the most-used folder matching "proj", `zi` picks interactively
-eval "$(zoxide init zsh)"
+_cached_init zoxide $commands[zoxide] zoxide init zsh
 
 # fzf: Ctrl-R history, Ctrl-T files, Option-C folders
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
@@ -24,7 +25,7 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range :300 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --level 2 --color=always --icons {}'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap"
-source <(fzf --zsh)
+_cached_init fzf $commands[fzf] fzf --zsh
 
 # fzf-tab: Tab opens a fuzzy menu with previews
 zstyle ':completion:*' menu no

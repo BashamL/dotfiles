@@ -4,6 +4,23 @@
 # mise: switch Node etc. per folder (.node-version, mise.toml)
 eval "$(/opt/homebrew/bin/mise activate zsh)"
 
+# mise's own precmd hook starts mise (about 20 ms) before every prompt. Its cd
+# hook stays; past that, refresh only after a command that runs mise or git,
+# which can change the versions a folder pins.
+if (( $+functions[_mise_hook_precmd] && $+functions[_mise_hook] )); then
+  add-zsh-hook -d precmd _mise_hook_precmd
+  _mise_mark_refresh() {
+    [[ " $2" == *[[:space:]\;\&\|\(](mise|git)([[:space:]]*|) ]] && _mise_refresh=1
+  }
+  _mise_refresh_precmd() {
+    (( _mise_refresh )) || return 0
+    _mise_refresh=0
+    _mise_hook --reason precmd
+  }
+  add-zsh-hook preexec _mise_mark_refresh
+  add-zsh-hook precmd _mise_refresh_precmd
+fi
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 path=("$BUN_INSTALL/bin" $path)

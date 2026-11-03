@@ -55,7 +55,7 @@ setopt AUTO_CD                # type a folder name to cd into it
 setopt INTERACTIVE_COMMENTS   # allow # comments at the prompt
 
 # ── Modules ──────────────────────────────────────────────────────────────
-for f in "$DOTFILES"/zsh/{env,toolchains,tools,aliases,functions,menu,editing,brew}.zsh; do
+for f in "$DOTFILES"/zsh/{cached-init,env,toolchains,tools,aliases,functions,menu,editing,brew}.zsh; do
   source "$f"
 done
 [[ -f "$DOTFILES/zsh/local.zsh" ]] && source "$DOTFILES/zsh/local.zsh"   # untracked, machine-only

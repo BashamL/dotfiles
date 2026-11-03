@@ -26,7 +26,7 @@ Then open a new terminal tab. `install.sh` is safe to run again. It:
 | Path | What it does |
 | --- | --- |
 | `zsh/` | History, plugins, aliases, fzf helpers (`fe`, `rge`, `fbr`, `wt`), the `menu` launcher and Mac-style text selection on the command line |
-| `starship/` | Two-line prompt. `prompt-link` makes the folder and git branch Cmd-clickable in Ghostty |
+| `starship/` | Two-line prompt. `zsh/prompt-links.zsh` makes the folder and git branch Cmd-clickable in Ghostty |
 | `ghostty/` | Terminal config and a cursor-trail shader |
 | `yazi/` | File manager config, opened with `y` |
 | `git/gitconfig` | Git defaults and aliases |
