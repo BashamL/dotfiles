@@ -7,13 +7,13 @@ add_newline = true
 command_timeout = 800
 
 # Line 1: folder, git, toolchain, how long the last command took
-# Line 2: ❯ (time on the right)
+# Line 2: ❯ (zsh/prompt.zsh draws the time on the right)
 # Folder and branch are links: Cmd-click opens Finder or GitHub (zsh/prompt-links.zsh)
 format = """
 ${env_var.PROMPT_LINK_DIR}\
 ${env_var.PROMPT_LINK_BRANCH}\
 $git_state\
-$git_status\
+${env_var.PROMPT_GIT_STATUS}\
 $nodejs\
 $bun\
 $python\
@@ -21,7 +21,6 @@ $ruby\
 $docker_context\
 $cmd_duration
 $character"""
-right_format = "$time"
 
 # Set by zsh/prompt-links.zsh before each prompt, coloured already
 [env_var.PROMPT_LINK_DIR]
@@ -29,6 +28,10 @@ format = "$env_value "
 
 [env_var.PROMPT_LINK_BRANCH]
 format = "[on](overlay1) $env_value "
+
+# git_status rendered in the background by zsh/prompt-git.zsh
+[env_var.PROMPT_GIT_STATUS]
+format = "$env_value"
 
 [git_status]
 style = "bold yellow"
@@ -75,11 +78,6 @@ style = "bold peach"
 format = "[took](overlay1) [$duration]($style) "
 # Long-command notifications come from Ghostty (notify-on-command-finish)
 
-[time]
-disabled = false
-style = "overlay1"
-format = "[$time]($style)"
-time_format = "%H:%M"
 
 [character]
 success_symbol = "[❯](bold mauve)"

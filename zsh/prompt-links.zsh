@@ -21,6 +21,7 @@ _prompt_links() {
   local top=$PWD start rest gitdir common head branch remote line origin=0
   local -a parts mtime
   while [[ -n $top && ! -e $top/.git ]]; do top=${top%/*}; done
+  _prompt_repo=$top   # for prompt-git.zsh
 
   if [[ -n $top ]]; then
     # Inside a repo: repo name, then the path below it

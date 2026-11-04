@@ -1,12 +1,4 @@
-# Prompt, jumping, fuzzy finding
-
-# Starship prompt (~/.config/starship.toml); agents get a plain one
-if [[ -n $AGENT_SHELL ]]; then
-  PROMPT='%~ %# '
-else
-  _cached_init starship $commands[starship] starship init zsh --print-full-init
-  source "$DOTFILES/zsh/prompt-links.zsh"
-fi
+# Jumping, fuzzy finding
 
 # zoxide: `z proj` jumps to the most-used folder matching "proj", `zi` picks interactively
 _cached_init zoxide $commands[zoxide] zoxide init zsh

@@ -135,15 +135,18 @@ The cursor streaks when it jumps: `~/dotfiles/ghostty/shaders/cursor-trail.glsl`
 
 | File | What it is |
 | --- | --- |
-| `~/dotfiles/zsh/zshrc` | Oh My Zsh, plugins, history |
+| `~/dotfiles/zsh/zshrc` | Oh My Zsh, plugins, history; what loads before the first prompt and what after |
+| `~/dotfiles/zsh/later.zsh` | Loads plugins and the rest once the first prompt is on screen |
 | `~/dotfiles/zsh/zshenv`, `zprofile` | PATH: mise shims and `~/.local/bin` ahead of Homebrew |
 | `~/dotfiles/zsh/brew.zsh` | Homebrew upgrade every 3 days in the background |
 | `~/dotfiles/zsh/aliases.zsh` | Shortcuts |
 | `~/dotfiles/zsh/functions.zsh` | fe, rge, fbr, wt, fkill, port |
 | `~/dotfiles/zsh/menu.zsh` | The `menu` launcher: add a row to add a button |
 | `~/dotfiles/zsh/editing.zsh` | Selecting text on the command line |
+| `~/dotfiles/zsh/prompt.zsh` | Starship and the clock on the right |
 | `~/dotfiles/zsh/prompt-links.zsh` | The clickable folder and branch in the prompt |
-| `~/dotfiles/zsh/tools.zsh` | Starship, zoxide, fzf |
+| `~/dotfiles/zsh/prompt-git.zsh` | Git's file counts, filled in after the prompt draws |
+| `~/dotfiles/zsh/tools.zsh` | zoxide, fzf |
 | `~/dotfiles/zsh/toolchains.zsh` | mise, bun, LM Studio |
 | `~/dotfiles/zsh/local.zsh` | Extras for this machine only (aliases, menu rows), not tracked by git |
 | `~/dotfiles/starship/starship.toml` | Prompt |

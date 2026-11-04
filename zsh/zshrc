@@ -1,5 +1,5 @@
 # Sourced from ~/.zshrc. Edit with `dots`, apply with `reload`. Cheat sheet: `cheat`.
-# Profile startup: ZPROF=1 zsh -i -c exit
+# Profile startup: ZPROF=1 zsh -i -c exit (loads everything up front)
 [[ -n $ZPROF ]] && zmodload zsh/zprof
 
 DOTFILES="$HOME/dotfiles"
@@ -44,9 +44,9 @@ plugins=(
 )
 [[ -n $AGENT_SHELL ]] && plugins=(git)
 
-source "$ZSH/oh-my-zsh.sh"
-
 # ── Shell behaviour ──────────────────────────────────────────────────────
+# Set before the first prompt: zsh reads the history file once rc files finish.
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
@@ -55,9 +55,25 @@ setopt AUTO_CD                # type a folder name to cd into it
 setopt INTERACTIVE_COMMENTS   # allow # comments at the prompt
 
 # ── Modules ──────────────────────────────────────────────────────────────
-for f in "$DOTFILES"/zsh/{cached-init,env,toolchains,tools,aliases,functions,menu,editing,brew}.zsh; do
+# Enough to draw the prompt, then the rest once it's on screen (later.zsh).
+for f in "$DOTFILES"/zsh/{cached-init,env,prompt}.zsh; do
   source "$f"
 done
-[[ -f "$DOTFILES/zsh/local.zsh" ]] && source "$DOTFILES/zsh/local.zsh"   # untracked, machine-only
+
+later=("$ZSH/oh-my-zsh.sh" "$DOTFILES"/zsh/{toolchains,tools,aliases,functions,menu,editing,brew}.zsh)
+[[ -f "$DOTFILES/zsh/local.zsh" ]] && later+=("$DOTFILES/zsh/local.zsh")   # untracked, machine-only
+
+# Only a shell reading commands from a terminal ever gets an idle line editor.
+# The rest (`zsh -i -c`, which editors use to read the environment, piped
+# scripts), agent shells and profiling load everything up front.
+if [[ -o zle && -o shinstdin && -t 0 && -z $AGENT_SHELL && -z $ZPROF ]]; then
+  source "$DOTFILES/zsh/later.zsh"
+  zsh_later $later
+else
+  for f in $later; do
+    source "$f"
+  done
+fi
+unset f later
 
 [[ -n $ZPROF ]] && zprof
