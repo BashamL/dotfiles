@@ -76,4 +76,8 @@ else
 fi
 unset f later
 
+# Agents write bash: split unquoted $var into words the way bash does. Set
+# after the plugins load, which expect zsh's default.
+[[ -n $AGENT_SHELL ]] && setopt SH_WORD_SPLIT
+
 [[ -n $ZPROF ]] && zprof

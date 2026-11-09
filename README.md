@@ -41,4 +41,4 @@ Then open a new terminal tab. `install.sh` is safe to run again. It:
 
 ## Agent shells
 
-When Cursor's agent terminal or Claude Code runs the shell (`CURSOR_AGENT`, `CLAUDECODE`, `AI_AGENT` or `CODEX_SANDBOX` is set), it gets a plain prompt, only the git plugin, `PAGER=cat` and `GIT_EDITOR=true`, so no command waits for a keyboard.
+When Cursor's agent terminal or Claude Code runs the shell (`CURSOR_AGENT`, `CLAUDECODE`, `AI_AGENT` or `CODEX_SANDBOX` is set), it gets a plain prompt, only the git plugin, `PAGER=cat` and `GIT_EDITOR=true`, so no command waits for a keyboard. It also sets `SH_WORD_SPLIT`, so an unquoted `$var` splits into words as it does in bash, which is what agents write.
